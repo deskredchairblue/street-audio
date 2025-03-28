@@ -1,0 +1,19 @@
+# Neural Audio Processing Example
+
+This folder showcases how to run AI/ML-based models on audio input
+for tasks such as enhancement, separation, or transcription.
+
+Examples may include:
+- Running inference using ONNX or TensorFlow.js
+- Loading a pre-trained model
+- Applying the model to real-time or uploaded audio
+
+Recommended files to add:
+- model-loader.js
+- inference-engine.js
+- enhance-audio-demo.js
+
+Usage:
+1. Convert your model to a supported format (see scripts/model-conversion.js)
+2. Load the model and initialize the neural engine
+3. Pass audio buffers and collect enhanced or analyzed output
