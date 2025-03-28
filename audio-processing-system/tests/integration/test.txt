@@ -1,0 +1,17 @@
+INTEGRATION TEST PLAN
+
+This folder contains tests that verify cooperation between multiple modules.
+
+Focus:
+- Uploading an audio file and parsing metadata
+- Real-time WebSocket stream lifecycle
+- Full DAW session: start → apply effect → export
+
+Tools:
+- Supertest (for API)
+- WebSocket client lib
+- In-memory MongoDB or Redis (if needed)
+
+Each test should:
+- Mimic real user flows
+- Validate data handoff across services/controllers
