@@ -1,0 +1,17 @@
+UNIT TEST PLAN
+
+This folder contains unit tests for individual functions and classes.
+
+Focus:
+- AudioTrack, Playlist, AudioSession models
+- Services like AudioLoaderService, AnalysisService
+- Utils: BufferUtils, FormatConverter, AudioMath
+
+Tools:
+- Jest or Mocha
+- Sinon (for mocks/stubs)
+
+Each unit test should:
+- Cover edge cases
+- Validate output types
+- Simulate minimal dependencies
