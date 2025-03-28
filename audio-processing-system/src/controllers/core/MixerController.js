@@ -1,47 +1,49 @@
-// src/controllers/core/PlaybackController.js
+// src/controllers/core/MixerController.js
 
-class PlaybackController {
+class MixerController {
   constructor() {
-    this.sessions = new Map(); // sessionId -> playback state
+    this.trackStates = new Map(); // trackId -> { volume, pan, muted, solo }
   }
 
-  createSession(sessionId, options = {}) {
-    this.sessions.set(sessionId, {
-      isPlaying: false,
-      currentTime: 0,
-      loop: options.loop || false,
-      duration: options.duration || 0
+  setTrack(trackId, options = {}) {
+    this.trackStates.set(trackId, {
+      volume: options.volume ?? 1.0,
+      pan: options.pan ?? 0,
+      muted: options.muted ?? false,
+      solo: options.solo ?? false
     });
   }
 
-  play(sessionId) {
-    const state = this.sessions.get(sessionId);
-    if (state) state.isPlaying = true;
+  updateTrack(trackId, options = {}) {
+    const state = this.trackStates.get(trackId);
+    if (!state) return;
+
+    Object.assign(state, options);
   }
 
-  pause(sessionId) {
-    const state = this.sessions.get(sessionId);
-    if (state) state.isPlaying = false;
+  mute(trackId) {
+    const state = this.trackStates.get(trackId);
+    if (state) state.muted = true;
   }
 
-  stop(sessionId) {
-    const state = this.sessions.get(sessionId);
-    if (state) {
-      state.isPlaying = false;
-      state.currentTime = 0;
-    }
+  unmute(trackId) {
+    const state = this.trackStates.get(trackId);
+    if (state) state.muted = false;
   }
 
-  seek(sessionId, time) {
-    const state = this.sessions.get(sessionId);
-    if (state && time >= 0 && time <= state.duration) {
-      state.currentTime = time;
-    }
+  solo(trackId) {
+    const state = this.trackStates.get(trackId);
+    if (state) state.solo = true;
   }
 
-  getState(sessionId) {
-    return this.sessions.get(sessionId) || null;
+  unsolo(trackId) {
+    const state = this.trackStates.get(trackId);
+    if (state) state.solo = false;
+  }
+
+  getTrackState(trackId) {
+    return this.trackStates.get(trackId) || null;
   }
 }
 
-module.exports = new PlaybackController();
+module.exports = new MixerController();
